@@ -1,4 +1,5 @@
 import apiClient from "./api-client.ts";
+import FlightFilters from "../components/FlightFilters.tsx";
 
 export interface Flight {
   id: number;
@@ -9,8 +10,11 @@ export interface Flight {
 }
 
 class FlightService {
-  public async getAll(signal?: AbortSignal) {
-    const response = await apiClient.get<Flight[]>("/flights", { signal });
+  public async getFlights(params?: FlightFilters, signal?: AbortSignal) {
+    const response = await apiClient.get<Flight[]>("/flights", {
+      params,
+      signal,
+    });
     return response.data;
   }
 }

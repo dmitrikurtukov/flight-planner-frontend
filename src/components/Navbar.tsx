@@ -3,7 +3,7 @@ import { IoMdAirplane } from "react-icons/io";
 
 function Navbar() {
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
       <div className="container-fluid">
         <Link className="navbar-brand d-flex align-items-center" to="/">
           <IoMdAirplane className="me-2" size={25} />
