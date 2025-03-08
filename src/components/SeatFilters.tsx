@@ -29,8 +29,6 @@ function SeatFilters({ onFilterChange }: Readonly<SeatFiltersProps>) {
     if (nearExit) filters.nearExit = nearExit;
     if (seatsTogether) filters.seatsTogether = seatsTogether;
     if (seatClass) filters.seatClass = seatClass;
-    console.log(filters);
-
     onFilterChange(filters);
   }, [
     passengerCount,
@@ -42,9 +40,21 @@ function SeatFilters({ onFilterChange }: Readonly<SeatFiltersProps>) {
     onFilterChange,
   ]);
 
+  const handleSeatsTogetherChange = () => {
+    setSeatsTogether((prev) => {
+      const newSeatsTogether = !prev;
+      if (newSeatsTogether) {
+        setWindowPreferred(false);
+        setExtraLegroom(false);
+        setNearExit(false);
+      }
+      return newSeatsTogether;
+    });
+  };
+
   return (
     <div className="card p-3 shadow-sm">
-      <h5>Filters</h5>
+      <h4>Filters</h4>
 
       <label className="form-label">
         Seat Class:{" "}
@@ -66,6 +76,7 @@ function SeatFilters({ onFilterChange }: Readonly<SeatFiltersProps>) {
           className="form-check-input"
           id="windowPreferred"
           checked={windowPreferred}
+          disabled={seatsTogether}
           onChange={() => setWindowPreferred((prev) => !prev)}
         />
         <label className="form-check-label" htmlFor="windowPreferred">
@@ -79,6 +90,7 @@ function SeatFilters({ onFilterChange }: Readonly<SeatFiltersProps>) {
           className="form-check-input"
           id="extraLegroom"
           checked={extraLegroom}
+          disabled={seatsTogether}
           onChange={() => setExtraLegroom((prev) => !prev)}
         />
         <label className="form-check-label" htmlFor="extraLegroom">
@@ -92,6 +104,7 @@ function SeatFilters({ onFilterChange }: Readonly<SeatFiltersProps>) {
           className="form-check-input"
           id="nearExit"
           checked={nearExit}
+          disabled={seatsTogether}
           onChange={() => setNearExit((prev) => !prev)}
         />
         <label className="form-check-label" htmlFor="nearExit">
@@ -105,7 +118,7 @@ function SeatFilters({ onFilterChange }: Readonly<SeatFiltersProps>) {
           className="form-check-input"
           id="seatsTogether"
           checked={seatsTogether}
-          onChange={() => setSeatsTogether((prev) => !prev)}
+          onChange={handleSeatsTogetherChange}
         />
         <label className="form-check-label" htmlFor="seatsTogether">
           Seats Together
@@ -119,7 +132,7 @@ function SeatFilters({ onFilterChange }: Readonly<SeatFiltersProps>) {
             type="number"
             className="form-control"
             min="1"
-            max="10"
+            max="3"
             value={passengerCount}
             onChange={(e) => setPassengerCount(Number(e.target.value))}
           />

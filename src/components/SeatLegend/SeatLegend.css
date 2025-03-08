@@ -1,0 +1,34 @@
+.legend-box {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    border-radius: 3px;
+    border: 2px solid #ccc;
+}
+
+.legend-box.first-class {
+    background-color: #dc3545;
+}
+
+.legend-box.business {
+    background-color: #0d6efd;
+}
+
+.legend-box.economy {
+    background-color: #e0e0e0;
+}
+
+.legend-box.reserved {
+    background-color: #6c757d;
+}
+
+.legend-box.recommended {
+    border: 3px solid #30d529;
+    box-shadow: 0 0 6px rgba(48, 213, 41, 0.5);
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+}

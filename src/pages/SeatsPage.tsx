@@ -3,30 +3,43 @@ import seatService, { Seat } from "../services/seat-service.ts";
 import { useEffect, useState } from "react";
 import { CanceledError } from "axios";
 import SeatFilters from "../components/SeatFilters.tsx";
+import SeatMap from "../components/SeatMap/SeatMap.tsx";
+import SeatLegend from "../components/SeatLegend/SeatLegend.tsx";
 
 function SeatsPage() {
   const { flightId } = useParams();
-  const [seats, setSeats] = useState<Seat[]>([]);
+  const [allSeats, setAllSeats] = useState<Seat[]>([]);
+  const [recommendedSeats, setRecommendedSeats] = useState<Seat[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [filters, setFilters] = useState<SeatFilters>({});
 
   useEffect(() => {
     if (!flightId) return;
-
     const controller = new AbortController();
-
     seatService
-      .getSeatsByFlight(Number(flightId), filters, controller.signal)
+      .getAllSeats(Number(flightId), controller.signal)
       .then((seats) => {
-        setSeats(seats);
+        setAllSeats(seats);
       })
       .catch((error) => {
         if (error instanceof CanceledError) return;
-        setError("Failed to load seats.");
+        setError("Failed to load all allSeats.");
       });
-
     return () => controller.abort();
-  }, [filters, flightId]);
+  }, [flightId]);
+
+  useEffect(() => {
+    if (!flightId) return;
+    const controller = new AbortController();
+    seatService
+      .getRecommendedSeatsByFlight(Number(flightId), filters, controller.signal)
+      .then((seats) => setRecommendedSeats(seats))
+      .catch((error) => {
+        if (error instanceof CanceledError) return;
+        setError("Failed to load recommended allSeats.");
+      });
+    return () => controller.abort();
+  }, [flightId, filters]);
 
   if (error) return <div className="alert alert-danger my-5">{error}</div>;
 
@@ -36,9 +49,11 @@ function SeatsPage() {
         <div className="col-md-3">
           <SeatFilters onFilterChange={setFilters} />
         </div>
-
-        <div className="col-md-9 text-center">
-          <h2>Available Seats: {seats.length}</h2>
+        <div className="col-md-6 text-center shadow-sm card p-3 align-items-center">
+          <SeatMap allSeats={allSeats} recommendedSeats={recommendedSeats} />
+        </div>
+        <div className="col-md-3">
+          <SeatLegend />
         </div>
       </div>
     </div>

@@ -8,7 +8,7 @@ export interface Seat {
 }
 
 class SeatService {
-  public async getSeatsByFlight(
+  public async getRecommendedSeatsByFlight(
     flightId: number,
     params?: SeatFilters,
     signal?: AbortSignal,
@@ -16,6 +16,14 @@ class SeatService {
     const response = await apiClient.get<Seat[]>(
       `/seats?flightId=${flightId}`,
       { params, signal },
+    );
+    return response.data;
+  }
+
+  public async getAllSeats(flightId: number, signal?: AbortSignal) {
+    const response = await apiClient.get<Seat[]>(
+      `/seats/all?flightId=${flightId}`,
+      { signal },
     );
     return response.data;
   }

@@ -69,7 +69,7 @@ function FlightFilters({ onFilterChange }: Readonly<FlightFiltersProps>) {
           {departureDate && (
             <button
               onClick={() => setDepartureDate("")}
-              className="btn btn-outline-secondary"
+              className="btn btn-light border"
               type="button"
               aria-label="Clear"
             >

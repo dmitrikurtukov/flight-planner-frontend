@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 function HomePage() {
   return (
-    <div className="container d-flex flex-column align-items-center text-center mt-5">
+    <div className="container d-flex flex-column align-items-center text-center my-5">
       <h1 className="fw-bold animate__animated animate__fadeInDown">
         Welcome to Flight Planner!
       </h1>
@@ -20,7 +20,8 @@ function HomePage() {
         <img
           src="/images/airplane.jpg"
           alt="Airplane"
-          className="img-fluid img-size animate__animated animate__zoomIn"
+          className="img-fluid img-size rounded-circle animate__animated animate__zoomIn"
+          style={{ width: 450 }}
         />
       </div>
     </div>
