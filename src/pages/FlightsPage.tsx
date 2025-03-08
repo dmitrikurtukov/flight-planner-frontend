@@ -26,12 +26,14 @@ function FlightsPage() {
 
   return (
     <div className="container text-center my-5">
-      <h2>Available Flights</h2>
+      <h2 className="animate__animated animate__fadeInDown">
+        Available Flights
+      </h2>
       <FlightFilters onFilterChange={setFilters} />
       {error ? (
         <div className="alert alert-danger mt-4">{error}</div>
       ) : (
-        <table className="table table-bordered table-striped border-secondary-subtle mt-4 align-middle">
+        <table className="table table-bordered table-striped border-secondary-subtle mt-4 align-middle animate__animated animate__fadeInUp">
           <thead>
             <tr>
               <th scope="col">Flight nr</th>
@@ -53,7 +55,7 @@ function FlightsPage() {
                 <td>
                   <button
                     onClick={() => navigate(`/seats/${flight.id}`)}
-                    className="btn btn-primary "
+                    className="btn btn-primary animate__animated animate__pulse"
                   >
                     Select Seats
                   </button>

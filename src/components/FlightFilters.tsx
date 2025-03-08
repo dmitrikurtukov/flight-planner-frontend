@@ -46,8 +46,8 @@ function FlightFilters({ onFilterChange }: Readonly<FlightFiltersProps>) {
   ]);
 
   return (
-    <div className="row my-4">
-      <div className="col-md-3">
+    <div className="row my-4 animate__animated animate__fadeInLeft">
+      <div className="col-md-3 animate__animated">
         <label htmlFor="destination">Destination</label>
         <input
           type="text"

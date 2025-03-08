@@ -45,14 +45,14 @@ function SeatsPage() {
 
   return (
     <div className="container my-5">
-      <div className="row">
-        <div className="col-md-3">
+      <div className="row justify-content-center">
+        <div className="col-md-3 animate__animated animate__fadeInLeft">
           <SeatFilters onFilterChange={setFilters} />
         </div>
-        <div className="col-md-6 text-center shadow-sm card p-3 align-items-center">
+        <div className="col-md-3 text-center shadow-sm card p-3 align-items-center animate__animated animate__fadeInUp">
           <SeatMap allSeats={allSeats} recommendedSeats={recommendedSeats} />
         </div>
-        <div className="col-md-3">
+        <div className="col-md-3 animate__animated animate__fadeInRight">
           <SeatLegend />
         </div>
       </div>
