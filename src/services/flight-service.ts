@@ -10,7 +10,10 @@ export interface Flight {
 }
 
 class FlightService {
-  public async getFlights(params?: FlightFilters, signal?: AbortSignal) {
+  public async getFlights(
+    params?: FlightFilters,
+    signal?: AbortSignal,
+  ): Promise<Flight[]> {
     const response = await apiClient.get<Flight[]>("/flights", {
       params,
       signal,

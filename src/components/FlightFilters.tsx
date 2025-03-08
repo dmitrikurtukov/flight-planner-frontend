@@ -14,7 +14,7 @@ interface FlightFiltersProps {
   onFilterChange: (filters: FlightFilters) => void;
 }
 
-function FlightFilters({ onFilterChange }: FlightFiltersProps) {
+function FlightFilters({ onFilterChange }: Readonly<FlightFiltersProps>) {
   const [destination, setDestination] = useState("");
   const [departureDate, setDepartureDate] = useState("");
   const [minPrice, setMinPrice] = useState(0);
@@ -44,6 +44,7 @@ function FlightFilters({ onFilterChange }: FlightFiltersProps) {
     onFilterChange,
     sortBy,
   ]);
+
   return (
     <div className="row my-4">
       <div className="col-md-3">
@@ -58,12 +59,24 @@ function FlightFilters({ onFilterChange }: FlightFiltersProps) {
 
       <div className="col-md-2">
         <label htmlFor="departureDate">Departure Date</label>
-        <input
-          type="date"
-          className="form-control"
-          value={departureDate}
-          onChange={(e) => setDepartureDate(e.target.value)}
-        />
+        <div className="input-group">
+          <input
+            type="date"
+            className="form-control"
+            value={departureDate || ""}
+            onChange={(e) => setDepartureDate(e.target.value)}
+          />
+          {departureDate && (
+            <button
+              onClick={() => setDepartureDate("")}
+              className="btn btn-outline-secondary"
+              type="button"
+              aria-label="Clear"
+            >
+              <span className="btn-close" aria-hidden="true"></span>
+            </button>
+          )}
+        </div>
       </div>
 
       <div className="col-md-2">
@@ -109,18 +122,22 @@ function FlightFilters({ onFilterChange }: FlightFiltersProps) {
         />
       </div>
       <div className="col-md-3">
-        <label className="form-label">Sort by</label>
-        <select
-          className="form-select"
-          value={sortBy || ""}
-          onChange={(e) => setSortBy(e.target.value as FlightFilters["sortBy"])}
-        >
-          <option value="">None</option>
-          <option value="price_asc">Price: Low to High</option>
-          <option value="price_desc">Price: High to Low</option>
-          <option value="time_asc">Departure: Earliest First</option>
-          <option value="time_desc">Departure: Latest First</option>
-        </select>
+        <label className="form-label">
+          Sort By{" "}
+          <select
+            className="form-select"
+            value={sortBy ?? ""}
+            onChange={(e) =>
+              setSortBy(e.target.value as FlightFilters["sortBy"])
+            }
+          >
+            <option value="">None</option>
+            <option value="price_asc">Price: Low to High</option>
+            <option value="price_desc">Price: High to Low</option>
+            <option value="time_asc">Departure: Earliest First</option>
+            <option value="time_desc">Departure: Latest First</option>
+          </select>
+        </label>
       </div>
     </div>
   );
