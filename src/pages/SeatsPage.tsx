@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import seatService, { Seat } from "../services/seat-service.ts";
 import { useEffect, useState } from "react";
 import { CanceledError } from "axios";
@@ -54,6 +54,11 @@ function SeatsPage() {
         </div>
         <div className="col-md-3 animate__animated animate__fadeInRight">
           <SeatLegend />
+          <div className="d-flex justify-content-center">
+            <Link to="/flights" className="btn btn-primary mt-3">
+              Go back to Flights
+            </Link>
+          </div>
         </div>
       </div>
     </div>

@@ -1,0 +1,9 @@
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: flight-planner-frontend
+    container_name: flight-planner-frontend
+    ports:
+      - "5173:5173"
