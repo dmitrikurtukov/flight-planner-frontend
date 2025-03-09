@@ -23,7 +23,7 @@ function SeatsPage() {
       })
       .catch((error) => {
         if (error instanceof CanceledError) return;
-        setError("Failed to load all allSeats.");
+        setError("Failed to load all seats.");
       });
     return () => controller.abort();
   }, [flightId]);
@@ -36,12 +36,17 @@ function SeatsPage() {
       .then((seats) => setRecommendedSeats(seats))
       .catch((error) => {
         if (error instanceof CanceledError) return;
-        setError("Failed to load recommended allSeats.");
+        setError("Failed to load recommended seats.");
       });
     return () => controller.abort();
   }, [flightId, filters]);
 
-  if (error) return <div className="alert alert-danger my-5">{error}</div>;
+  if (error)
+    return (
+      <div className="container text-center alert alert-danger my-5">
+        {error}
+      </div>
+    );
 
   return (
     <div className="container my-5">
