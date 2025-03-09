@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import flightService, { Flight } from "../services/flight-service.ts";
 import FlightFilters from "../components/FlightFilters.tsx";
 import { useNavigate } from "react-router-dom";
-import { CanceledError } from "../services/api-client.ts";
+import { CanceledError } from "axios";
 
 function FlightsPage() {
   const [flights, setFlights] = useState<Flight[]>([]);
@@ -36,7 +36,7 @@ function FlightsPage() {
         <table className="table table-bordered table-striped border-secondary-subtle mt-4 align-middle animate__animated animate__fadeInUp">
           <thead>
             <tr>
-              <th scope="col">Flight nr</th>
+              <th scope="col">Flight ID</th>
               <th scope="col">Destination</th>
               <th scope="col">Departure Date</th>
               <th scope="col">Duration (min)</th>
@@ -45,9 +45,9 @@ function FlightsPage() {
             </tr>
           </thead>
           <tbody>
-            {flights.map((flight, index) => (
+            {flights.map((flight) => (
               <tr className="text-center" key={flight.id}>
-                <td scope="row">{index + 1}</td>
+                <td scope="row">{flight.id}</td>
                 <td>{flight.destination}</td>
                 <td>{flight.departureTime.replace("T", " | ")}</td>
                 <td>{flight.duration}</td>
@@ -55,7 +55,7 @@ function FlightsPage() {
                 <td>
                   <button
                     onClick={() => navigate(`/seats/${flight.id}`)}
-                    className="btn btn-primary animate__animated animate__pulse"
+                    className="btn btn-primary"
                   >
                     Select Seats
                   </button>

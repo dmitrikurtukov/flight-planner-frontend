@@ -50,7 +50,11 @@ function SeatsPage() {
           <SeatFilters onFilterChange={setFilters} />
         </div>
         <div className="col-md-3 text-center shadow-sm card p-3 align-items-center animate__animated animate__fadeInUp">
-          <SeatMap allSeats={allSeats} recommendedSeats={recommendedSeats} />
+          <SeatMap
+            allSeats={allSeats}
+            recommendedSeats={recommendedSeats}
+            flightId={Number(flightId)}
+          />
         </div>
         <div className="col-md-3 animate__animated animate__fadeInRight">
           <SeatLegend />

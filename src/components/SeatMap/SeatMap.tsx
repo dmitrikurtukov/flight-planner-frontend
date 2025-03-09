@@ -4,12 +4,17 @@ import "./SeatMap.css";
 interface SeatMapProps {
   allSeats: Seat[];
   recommendedSeats: Seat[];
+  flightId: number;
 }
 
-function SeatMap({ allSeats, recommendedSeats }: Readonly<SeatMapProps>) {
+function SeatMap({
+  allSeats,
+  recommendedSeats,
+  flightId,
+}: Readonly<SeatMapProps>) {
   const seatsByRow: Record<string, Seat[]> = allSeats.reduce(
     (acc, seat) => {
-      const rowNumber = seat.seatNumber.replace(/\D/g, ""); // Извлекаем номер ряда
+      const rowNumber = seat.seatNumber.replace(/\D/g, "");
       if (!acc[rowNumber]) acc[rowNumber] = [];
       acc[rowNumber].push(seat);
       return acc;
@@ -43,7 +48,7 @@ function SeatMap({ allSeats, recommendedSeats }: Readonly<SeatMapProps>) {
 
   return (
     <div>
-      <h3>Flight Seats</h3>
+      <h3>{flightId}. Flight Seats</h3>
       <div className="d-flex flex-column gap-2 mt-4">
         {Object.entries(seatsByRow).map(([row, seats]) => (
           <div
