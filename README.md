@@ -3,7 +3,7 @@
 This is the frontend application for the **Flight Planner** project. It provides a user-friendly interface for searching
 flights, applying filters, and receiving seat recommendations based on user preferences.  
 Users can select a flight, view available seats, and apply filters such as window seat preference, extra legroom,
-proximity to exits, and keeping seats together when traveling in a group.  
+proximity to exits, and keeping seats together when traveling in a group (maximum of 3).  
 The frontend interacts with the backend via REST API and dynamically updates seat recommendations based on user input.
 
 ---

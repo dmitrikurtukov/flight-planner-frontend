@@ -127,7 +127,7 @@ function SeatFilters({ onFilterChange }: Readonly<SeatFiltersProps>) {
 
       <div className="mt-3">
         <label className="form-label">
-          Passengers:{" "}
+          Passengers (3 max):{" "}
           <input
             type="number"
             className="form-control"
