@@ -1,54 +1,65 @@
-# React + TypeScript + Vite
+# Flight Planner Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the frontend application for the **Flight Planner** project. It provides a user-friendly interface for searching
+flights, applying filters, and receiving seat recommendations based on user preferences.  
+Users can select a flight, view available seats, and apply filters such as window seat preference, extra legroom,
+proximity to exits, and keeping seats together when traveling in a group.  
+The frontend interacts with the backend via REST API and dynamically updates seat recommendations based on user input.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## **Tech Stack**
 
-## Expanding the ESLint configuration
+- **React (TypeScript)**
+- **Vite** (for fast development and build process)
+- **Bootstrap** (for UI styling)
+- **React Router** (for navigation)
+- **Axios** (for API requests)
+- **Docker** (for containerized deployment)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## **How to Run the Application**
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Make sure you have **Node.js 20+** and **Docker Desktop** installed.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+1. **Clone the repository** into WebStorm or similar IDE.
+2. **Install dependencies:**
+    ```sh
+    npm install
+    ```
+3. **Run the frontend application locally:**
+    ```sh
+    npm run dev
+    ```
+   The application should now be running at:  
+   **http://localhost:5173**
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+4. **(Optional) Run the frontend in a Docker container:**
+    ```sh
+    docker-compose up -d --build
+    ```
+
+---
+
+## **Development Process**
+
+### **Time Spent on the Project (Frontend Part):** 20+ hours
+
+### **Challenges and How They Were Solved**
+
+- **API Integration Issues:** Initially, API requests were not working due to CORS restrictions. This was fixed by
+  configuring CORS in the backend.
+- **Seat Map Layout:** Displaying seats in a structured way with a clear layout was challenging. I tested different
+  approaches and settled on a grid-based system inspired by existing transportation seat maps.
+- **State Management for Filters:** Initially considered using a custom hook (`useSeatFilters`) but later opted for
+  `useState`, because things weren't working properly.
+- **Highlighting Recommended Seats:** Instead of hiding non-matching seats, I decided to keep them visible and highlight
+  the recommended ones for a better user experience.
+
+---
+
+## **Notes**
+
+- The frontend expects the backend to be running at **http://localhost:8080**.
+- The UI is optimized for **desktop-first** experience.
